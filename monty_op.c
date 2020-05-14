@@ -1,78 +1,49 @@
 #include "monty.h"
-#include <string.h>
 /**
- * select_op - 
- * 
- * 
+ * main - Main functions of Monty's Interpreter
+ * @argc: Argument's counter
+ * @argv: Arguments to main
+ * Return: 0 is success
  */
-int select_op(char *opcode, stack_t **stack, unsigned int line_number)
-{
-	instruction_t funct_op[] = {
-	    {"pall", pall_op},
-	    {NULL, NULL}};
-	/*{"pint", pint_op},*/
-	/*{"pop", pop_op},*/
-	int i = 0;
-	while (funct_op[i].opcode != NULL)
-	{
-		if (strcmp(opcode, funct_op[i].opcode) == 0)
-			(funct_op[i].f)(stack, line_number);
-		i++;
-		return (0);
-	}
-	return (-1);
-}
 int main(int argc, char *argv[])
 {
 	FILE *fd;
 	stack_t *stack = NULL;
-	char *buffer = NULL;
+	char *buffer = NULL, *opcode = NULL, *tokens = NULL;
 	size_t len_buff = 0;
 	ssize_t bytes_read = 0;
 	unsigned int line_number = 0;
-	char *opcode = NULL;
-	char *tokens = NULL;
 	int select = 0;
+
 	if (argc != 2) /*Verifica cantidad de argumentos*/
-	{
-		printf("USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+		error_usage();
 	fd = fopen(argv[1], "r");
 	if (fd == NULL)
-	{
-		printf("Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
+		error_open(argv[1]);
 	while (bytes_read != -1)
 	{
 		bytes_read = getline(&buffer, &len_buff, fd);
 		if (bytes_read == -1)
 			break;
-		line_number++;
-		opcode = strtok(buffer, DELIM);
-		if (strcmp(opcode, "push") == 0)
+		line_number++, opcode = strtok(buffer, DELIM);
+		if (opcode != NULL)
 		{
-			tokens = strtok(NULL, DELIM);
-			if (tokens == NULL)
+			if (strcmp(opcode, "push") == 0)
 			{
-				printf("L%u: unknown instruction %s", line_number, opcode);
-				exit(EXIT_FAILURE);
+				tokens = strtok(NULL, DELIM);
+				if (tokens == NULL)
+					error_unknown(opcode, line_number), free_errors(stack, buffer, fd);
+				else
+					push_op(&stack, line_number, tokens);
 			}
 			else
 			{
-				push_op(&stack, line_number, tokens);
-			}
-		}
-		else
-		{
-			select = select_op(opcode, &stack, line_number);
-			if (select == -1)
-			{
-				printf("L%u: unknown instruction %s", line_number, opcode);
-				exit(EXIT_FAILURE);
+				select = select_op(opcode, &stack, line_number);
+				if (select == -1)
+					error_unknown(opcode, line_number), free_errors(stack, buffer, fd);
 			}
 		}
 	}
+	free_everything(stack, buffer, fd);
 	return (0);
 }
