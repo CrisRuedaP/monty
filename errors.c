@@ -4,7 +4,7 @@
  */
 void error_usage(void)
 {
-	printf("USAGE: monty file\n");
+	fprintf(stderr, "USAGE: monty file\n");
 	exit(EXIT_FAILURE);
 }
 /**
@@ -13,7 +13,7 @@ void error_usage(void)
  */
 void error_open(char *file_name)
 {
-	printf("Error: Can't open file %s\n", file_name);
+	fprintf(stderr, "Error: Can't open file %s\n", file_name);
 	exit(EXIT_FAILURE);
 }
 /**
@@ -23,5 +23,5 @@ void error_open(char *file_name)
  */
 void error_unknown(char *opcode, unsigned int line_number)
 {
-	printf("L%u: unknown instruction %s\n", line_number, opcode);
+	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 }
