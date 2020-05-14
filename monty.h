@@ -10,6 +10,8 @@
 #include <string.h>
 #define DELIM " \n\t\r"
 
+extern int err_status;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -51,5 +53,8 @@ void free_errors(stack_t *stack, char *buffer, FILE *fd);
 void error_usage(void);
 void error_open(char *file_name);
 void error_unknown(char *opcode, unsigned int line_number);
+void error_pint(unsigned int line_number);
+void error_pop(unsigned int line_number);
+void id_status(stack_t *stack, char *buffer, FILE *fd, unsigned int l_number);
 
 #endif /* _MONTY_H_ */

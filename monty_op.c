@@ -4,7 +4,9 @@
  * @argc: Argument's counter
  * @argv: Arguments to main
  * Return: 0 is success
+ * err_status - global variable
  */
+int err_status = 0;
 int main(int argc, char *argv[])
 {
 	FILE *fd;
@@ -39,6 +41,7 @@ int main(int argc, char *argv[])
 			else
 			{
 				select = select_op(opcode, &stack, line_number);
+				id_status(stack, buffer, fd, line_number);
 				if (select == -1)
 					error_unknown(opcode, line_number), free_errors(stack, buffer, fd);
 			}

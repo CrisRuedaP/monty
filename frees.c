@@ -8,6 +8,8 @@ void free_stack(stack_t *stack)
 {
 	stack_t *tmp, *aux;
 
+	if (stack == NULL)
+		return;
 	tmp = stack;
 	while (tmp != NULL)
 	{
@@ -15,13 +17,19 @@ void free_stack(stack_t *stack)
 		free(tmp);
 		tmp = aux;
 	}
-
 }
+/**
+ * free_errors - Frees all errors
+ * @stack: Double linked used to stack the integers
+ * @buffer: Buffer that stores the line for getline
+ * @fd: File descriptor of the Monty's file
+ */
 void free_errors(stack_t *stack, char *buffer, FILE *fd)
 {
+	if (stack != NULL)
+		free_stack(stack);
 	fclose(fd);
 	free(buffer);
-	free_stack(stack);
 	exit(EXIT_FAILURE);
 }
 /**
@@ -32,7 +40,8 @@ void free_errors(stack_t *stack, char *buffer, FILE *fd)
  */
 void free_everything(stack_t *stack, char *buffer, FILE *fd)
 {
+	if (stack != NULL)
+		free_stack(stack);
 	fclose(fd);
 	free(buffer);
-	free_stack(stack);
 }

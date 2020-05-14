@@ -10,9 +10,10 @@ int select_op(char *opcode, stack_t **stack, unsigned int line_number)
 {
 	instruction_t funct_op[] = {
 	    {"pall", pall_op},
-	    {NULL, NULL}};
-	/*{"pint", pint_op},*/
-	/*{"pop", pop_op},*/
+	    {"pint", pint_op},
+	    {"pop", pop_op},
+	    {NULL, NULL}
+	    };
 	int i = 0;
 
 	while (funct_op[i].opcode != NULL)
