@@ -23,5 +23,10 @@ void pop_op(stack_t **stack, unsigned int line_number)
 		tmp->prev->next = NULL;
 		free(tmp);
 	}
+	else
+	{
+		free(tmp);
+		*stack = NULL;
+	}
 	(void)line_number;
 }
