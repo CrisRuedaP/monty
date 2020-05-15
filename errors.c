@@ -31,3 +31,12 @@ void error_add(unsigned int line_number)
 {
 	fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
 }
+/**
+ * error_sub - Error for too short stack
+ * @line_number: Line number of the current opcode
+ */
+void error_sub(unsigned int line_number)
+{
+	fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+}
+

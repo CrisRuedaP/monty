@@ -1,4 +1,3 @@
-push 1
-pall
-nop
+push 3
+mul
 pall

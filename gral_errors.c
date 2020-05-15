@@ -25,6 +25,14 @@ void error_unknown(char *opcode, unsigned int line_number)
 {
 	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 }
+/**
+ * error_mul - Error for too short stack
+ * @line_number: Line number of the current opcode
+ */
+void error_mul(unsigned int line_number)
+{
+	fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
+}
 
 /**
  * id_status - Check's for type of error
@@ -53,6 +61,16 @@ void id_status(stack_t *stack, char *buffer, FILE *fd, unsigned int l_number)
 	if (err_status == 5)
 	{
 		error_add(l_number);
+		free_errors(stack, buffer, fd);
+	}
+	if (err_status == 6)
+	{
+		error_sub(l_number);
+		free_errors(stack, buffer, fd);
+	}
+	if (err_status == 7)
+	{
+		error_mul(l_number);
 		free_errors(stack, buffer, fd);
 	}
 }

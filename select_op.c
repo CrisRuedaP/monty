@@ -14,6 +14,8 @@ int select_op(char *opcode, stack_t **stack, unsigned int line_number)
 	    {"pop", pop_op},
 	    {"swap", swap_op},
 	    {"add", add_op},
+	    {"sub", sub_op},
+	    {"mul", mul_op},
 	    {NULL, NULL}
 	    };
 	int i = 0;
