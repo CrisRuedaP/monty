@@ -45,4 +45,14 @@ void id_status(stack_t *stack, char *buffer, FILE *fd, unsigned int l_number)
 		error_pop(l_number);
 		free_errors(stack, buffer, fd);
 	}
+	if (err_status == 4)
+	{
+		error_swap(l_number);
+		free_errors(stack, buffer, fd);
+	}
+	if (err_status == 5)
+	{
+		error_add(l_number);
+		free_errors(stack, buffer, fd);
+	}
 }

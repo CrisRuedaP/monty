@@ -12,10 +12,14 @@ int select_op(char *opcode, stack_t **stack, unsigned int line_number)
 	    {"pall", pall_op},
 	    {"pint", pint_op},
 	    {"pop", pop_op},
+	    {"swap", swap_op},
+	    {"add", add_op},
 	    {NULL, NULL}
 	    };
 	int i = 0;
 
+	if (strcmp(opcode, "nop") == 0)
+		return (0);
 	while (funct_op[i].opcode != NULL)
 	{
 		if (strcmp(opcode, funct_op[i].opcode) == 0)

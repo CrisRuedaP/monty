@@ -46,6 +46,8 @@ void pall_op(stack_t **stack, unsigned int line_number);
 void pint_op(stack_t **stack, unsigned int line_number);
 void push_op(stack_t **stack, unsigned int line_number, char *num);
 void pop_op(stack_t **stack, unsigned int line_number);
+void swap_op(stack_t **stack, unsigned int line_number);
+void add_op(stack_t **stack, unsigned int line_number);
 int select_op(char *opcode, stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *stack);
 void free_everything(stack_t *stack, char *buffer, FILE *fd);
@@ -55,6 +57,8 @@ void error_open(char *file_name);
 void error_unknown(char *opcode, unsigned int line_number);
 void error_pint(unsigned int line_number);
 void error_pop(unsigned int line_number);
+void error_swap(unsigned int line_number);
+void error_add(unsigned int line_number);
 void id_status(stack_t *stack, char *buffer, FILE *fd, unsigned int l_number);
 
 #endif /* _MONTY_H_ */

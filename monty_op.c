@@ -4,7 +4,6 @@
  * @argc: Argument's counter
  * @argv: Arguments to main
  * Return: 0 is success
- * err_status - global variable
  */
 int err_status = 0;
 int main(int argc, char *argv[])
